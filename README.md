@@ -61,6 +61,7 @@ public class MyGrid extends BaseTable {
 ```
 
 As for the selectors, you will have to provide a String to the grid that can be formated.
+
 ```"tbody > tr:nth-of-type(%s) > th:nth-of-type(%s)" 
 "thead > tr:nth-of-type(%s) > th:nth-of-type(%s)"```
 
