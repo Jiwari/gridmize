@@ -62,9 +62,9 @@ public class MyGrid extends BaseTable {
 
 As for the selectors, you will have to provide a String to the grid that can be formated.
 
-```"tbody > tr:nth-of-type(%s) > th:nth-of-type(%s)"
+```"tbody > tr:nth-of-type(%s) > th:nth-of-type(%s)"```
 
-"thead > tr:nth-of-type(%s) > th:nth-of-type(%s)"```
+```"thead > tr:nth-of-type(%s) > th:nth-of-type(%s)"```
 
 ###Modifiers
 Sometimes, your table doesn't start on the index 1 x 1, so you will have to set 'modifiers', these will be added to the index 1 (default).
