@@ -69,20 +69,12 @@ public class BaseTable implements Table {
 		return null;
 	}
 
-	public void setGridColumnModifier(int columnModifier) {
-		grid.setColumnModifier(columnModifier);
-	}
-
 	public void setGridRowModifier(int rowModifier) {
 		grid.setRowModifier(rowModifier);
 	}
 
-	public void setHeaderColumnModifier(int columnModifier) {		
-
-	}
-
 	public void setHeaderRowModifier(int rowModifier) {
-
+		gridHeader.setRowModifier(rowModifier);
 	}
 
 }

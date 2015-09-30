@@ -23,11 +23,7 @@ public interface Table {
 
 	Grid reloadGrid();
 
-	void setGridColumnModifier(int columnModifier);
-
 	void setGridRowModifier(int rowModifier);
-
-	void setHeaderColumnModifier(int columnModifier);
 
 	void setHeaderRowModifier(int rowModifier);
 }
