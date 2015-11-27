@@ -35,6 +35,6 @@ public class TableHeader {
 	}
 
 	public CellHeader getCellHeader(TableCellHeader cellHeader) {
-		return getHeaders().get(cellHeader.getIndex()-1);
+		return getHeaders().get(cellHeader.getIndex() - 1);
 	}
 }
