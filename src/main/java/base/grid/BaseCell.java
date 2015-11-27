@@ -4,7 +4,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +13,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 public abstract class BaseCell {
 
 	private String selector;
+	// Add your WebDriver here
 	private WebDriver driver = null;
 	private int row;
 	private int column;
@@ -41,7 +41,7 @@ public abstract class BaseCell {
 
 	protected WebElement getElement() {
 		try {
-			esperaSpinLoad();
+			waitScreenLoader();
 			element = null;
 			element = driver.findElement(By.cssSelector(getFormatedSelector()));
 			focusElement();
@@ -75,15 +75,18 @@ public abstract class BaseCell {
 					.pollingEvery(100, TimeUnit.MILLISECONDS)
 					.ignoring(NoSuchElementException.class)
 					.until(ExpectedConditions.elementToBeClickable(bySelector))
-					.sendKeys(Keys.ENTER);
-			esperaSpinLoad();
+					.click();
+			waitScreenLoader();
 	}
 
-	protected void esperaSpinLoad() {
-		esperaFecharElemento("[class='body-loader active']", 120);
+	protected void waitScreenLoader() {
+		//If there is a screen loader, add its CssPath here.
+		// With this, no action will be taken until the loader has closed
+		String loaderCssPath = "";
+		waitElementClose(loaderCssPath, 120);
 	}
 
-	private void esperaFecharElemento(String Css, int timeout) {
+	private void waitElementClose(String Css, int timeout) {
 		new FluentWait<WebDriver>(driver).withTimeout(100, TimeUnit.SECONDS).pollingEvery(100, TimeUnit.MILLISECONDS)
 				.ignoring(NoSuchElementException.class)
 				.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(Css)));
