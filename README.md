@@ -80,4 +80,5 @@ public MyGrid() {
 ```
 
 #Note
-The WebDriver is not by default, so you will have to add your WebDriver to the BaseCell class.
+The WebDriver is not set by default, so you will have to add your WebDriver to the BaseCell class.
+There is also a default wait that needs to be set on BaseCell that uses CssPath; feel free to change it and use it however you want.
