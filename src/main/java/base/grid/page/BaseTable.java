@@ -7,6 +7,7 @@ import base.grid.Grid;
 import base.grid.header.CellHeader;
 import base.grid.header.TableCellHeader;
 import base.grid.header.TableHeader;
+import base.grid.Cell;
 
 public class BaseTable implements Table {
 
@@ -29,6 +30,14 @@ public class BaseTable implements Table {
 
 	public Grid getGrid() {
 		return grid;
+	}
+
+	public List<BaseCell> getColumn(TableCellHeader header) {
+		return grid.getColumn(header);
+	}
+
+	public List<BaseCell> getRow(Cell cell) {
+		return grid.getRow(cell);
 	}
 
 	public TableCellHeader getHeader(String labelName) {
@@ -58,13 +67,16 @@ public class BaseTable implements Table {
 		return false;
 	}
 
-	public List<BaseCell> isTextDisplayed(List<BaseCell> column, String text) {
-		int iteradorLinha = 1;
+	public List<BaseCell> isTextDisplayed(List<BaseCell> column, String textExpected) {
+		int rowInterator = 1;
 		for (BaseCell cell : column) {
-			if (cell.getText().equalsIgnoreCase(text)) {
-				return grid.getRow(iteradorLinha);
+			String actualText = cell.getText();
+			if (actualText != null) {
+				if (actualText.equalsIgnoreCase(textExpected)) {
+					return grid.getRow(rowInterator);
+				}
 			}
-			iteradorLinha++;
+			rowInterator++;
 		}
 		return null;
 	}
@@ -76,5 +88,4 @@ public class BaseTable implements Table {
 	public void setHeaderRowModifier(int rowModifier) {
 		gridHeader.setRowModifier(rowModifier);
 	}
-
 }
