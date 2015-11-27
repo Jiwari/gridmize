@@ -34,7 +34,7 @@ public class Grid {
 		row += rowModifier;
 		TableCellHeader[] header = gridHeader.getEnumConstants();
 		for (int column = 1; column <= header.length; column++) {
-			cell.add(getCellType(header[column], row));
+			cell.add(getCellType(header[column - 1], row));
 		}
 		return cell;
 	}
