@@ -1,9 +1,8 @@
 package base.grid.page;
 
-import java.util.List;
-
-import base.grid.BaseCell;
+import base.grid.Column;
 import base.grid.Grid;
+import base.grid.Row;
 import base.grid.header.CellHeader;
 import base.grid.header.TableCellHeader;
 
@@ -15,9 +14,9 @@ public interface Table {
 
 	boolean isInfoDisplayedOnColumn(TableCellHeader columnEnum, String filter);
 
-	List<BaseCell> isTextDisplayed(List<BaseCell> cells, String filter);
+	Row isTextDisplayed(Column column, String filter);
 
-	List<BaseCell> getRowWithInfo(TableCellHeader columnEnum, String filter);
+	Row getRowWithInfo(TableCellHeader columnEnum, String filter);
 
 	Grid getGrid();
 

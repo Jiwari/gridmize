@@ -20,7 +20,7 @@ public class Grid {
 		this.rowModifier = rowModifier;
 	}
 
-	public List<BaseCell> getColumn(TableCellHeader header) {
+	public List<BaseCell> getColumn_Old(TableCellHeader header) {
 		List<BaseCell> cell = new ArrayList<BaseCell>();
 		int rowLimit = getRowLimit();
 		for (int row = 1; row <= rowLimit; row++) {
@@ -29,7 +29,28 @@ public class Grid {
 		return cell;
 	}
 
-	public List<BaseCell> getRow(int row) {
+	// TODO
+	public Column getColumn(TableCellHeader header) {
+		Column column = new Column(header);
+		int rowLimit = getRowLimit();
+		for (int rowIndex = 1; rowIndex <= rowLimit; rowIndex++) {
+			column.add(getCellType(header, rowIndex + rowModifier));
+		}
+		return column;
+	}
+
+	// TODO
+	public Row getRow(int rowIndex) {
+		rowIndex += rowModifier;
+		TableCellHeader[] header = gridHeader.getEnumConstants();
+		Row row = new Row(rowIndex);
+		for (int columnIndex = 1; columnIndex <= header.length; columnIndex++) {
+			row.add(getCellType(header[columnIndex - 1], rowIndex));
+		}
+		return row;
+	}
+
+	public List<BaseCell> getRow_Old(int row) {
 		List<BaseCell> cell = new ArrayList<BaseCell>();
 		row += rowModifier;
 		TableCellHeader[] header = gridHeader.getEnumConstants();
@@ -47,7 +68,7 @@ public class Grid {
 		}
 	}
 
-	public List<BaseCell> getRow(Cell row) {
+	public Row getRow(Cell row) {
 		return getRow(row.getRow());
 	}
 

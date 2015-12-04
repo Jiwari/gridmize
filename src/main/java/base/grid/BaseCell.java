@@ -13,8 +13,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 public abstract class BaseCell {
 
 	private String selector;
-	// Add your WebDriver here
-	private WebDriver driver = null;
+	private static WebDriver driver;
 	private int row;
 	private int column;
 	private WebElement element;
@@ -43,7 +42,7 @@ public abstract class BaseCell {
 		try {
 			waitScreenLoader();
 			element = null;
-			element = driver.findElement(By.cssSelector(getFormatedSelector()));
+			element = getDriver().findElement(By.cssSelector(getFormatedSelector()));
 			focusElement();
 		} catch (NoSuchElementException e) {
 		}
@@ -56,7 +55,7 @@ public abstract class BaseCell {
 	}
 
 	private void focusElement() {
-		JavascriptExecutor script = (JavascriptExecutor) driver;
+		JavascriptExecutor script = (JavascriptExecutor) getDriver();
 		String focusScript = "$(\"%s\").focus()";
 		script.executeScript(String.format(focusScript, getFormatedSelector()));
 	}
@@ -70,7 +69,7 @@ public abstract class BaseCell {
 	
 	public void click() {
 			By bySelector = By.cssSelector(getFormatedSelector());
-			new FluentWait<WebDriver>(driver)
+			new FluentWait<WebDriver>(getDriver())
 					.withTimeout(5, TimeUnit.SECONDS)
 					.pollingEvery(100, TimeUnit.MILLISECONDS)
 					.ignoring(NoSuchElementException.class)
@@ -87,8 +86,16 @@ public abstract class BaseCell {
 	}
 
 	private void waitElementClose(String Css, int timeout) {
-		new FluentWait<WebDriver>(driver).withTimeout(100, TimeUnit.SECONDS).pollingEvery(100, TimeUnit.MILLISECONDS)
+		new FluentWait<WebDriver>(getDriver()).withTimeout(100, TimeUnit.SECONDS).pollingEvery(100, TimeUnit.MILLISECONDS)
 				.ignoring(NoSuchElementException.class)
 				.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(Css)));
+	}
+
+	private static WebDriver getDriver() {
+		return driver;
+	}
+
+	public static void setDriver(WebDriver driver) {
+		BaseCell.driver = driver;
 	}
 }

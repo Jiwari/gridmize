@@ -4,10 +4,12 @@ import java.util.List;
 
 import base.grid.BaseCell;
 import base.grid.Grid;
+import base.grid.Row;
 import base.grid.header.CellHeader;
 import base.grid.header.TableCellHeader;
 import base.grid.header.TableHeader;
 import base.grid.Cell;
+import base.grid.Column;
 
 public class BaseTable implements Table {
 
@@ -32,11 +34,11 @@ public class BaseTable implements Table {
 		return grid;
 	}
 
-	public List<BaseCell> getColumn(TableCellHeader header) {
+	public Column getColumn(TableCellHeader header) {
 		return grid.getColumn(header);
 	}
 
-	public List<BaseCell> getRow(Cell cell) {
+	public Row getRow(Cell cell) {
 		return grid.getRow(cell);
 	}
 
@@ -56,9 +58,9 @@ public class BaseTable implements Table {
 		return this.header;
 	}
 
-	public List<BaseCell> getRowWithInfo(TableCellHeader columnEnum, String filter) {
-		List<BaseCell> columns = grid.getColumn(columnEnum);
-		return isTextDisplayed(columns, filter);
+	public Row getRowWithInfo(TableCellHeader columnEnum, String filter) {
+		Column column = grid.getColumn(columnEnum);
+		return isTextDisplayed(column, filter);
 	}
 
 	public boolean isInfoDisplayedOnColumn(TableCellHeader columnEnum, String filter) {
@@ -67,9 +69,10 @@ public class BaseTable implements Table {
 		return false;
 	}
 
-	public List<BaseCell> isTextDisplayed(List<BaseCell> column, String textExpected) {
+	public Row isTextDisplayed(Column column, String textExpected) {
 		int rowInterator = 1;
-		for (BaseCell cell : column) {
+		List<BaseCell> columnCells = column.getColumn();
+		for (BaseCell cell : columnCells) {
 			String actualText = cell.getText();
 			if (actualText != null) {
 				if (actualText.equalsIgnoreCase(textExpected)) {
