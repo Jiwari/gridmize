@@ -9,6 +9,7 @@ public class Column {
 	
 	private TableCellHeader columnHeader;
 	private List<BaseCell> column = new ArrayList<BaseCell>();
+	private int size;
 
 	
 	public Column(TableCellHeader columnHeader) {
@@ -25,5 +26,9 @@ public class Column {
 	
 	public TableCellHeader getColumnName() {
 		return this.columnHeader;
+	}
+
+	public int getSize() {
+		return size;
 	}
 }

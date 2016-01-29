@@ -17,6 +17,7 @@ public abstract class BaseCell {
 	private int row;
 	private int column;
 	private WebElement element;
+	private String loaderCssPath = "";
 	
 	protected int getRow() {
 		return row;
@@ -79,14 +80,13 @@ public abstract class BaseCell {
 	}
 
 	protected void waitScreenLoader() {
-		//If there is a screen loader, add its CssPath here.
-		// With this, no action will be taken until the loader has closed
-		String loaderCssPath = "";
-		waitElementClose(loaderCssPath, 120);
+		waitElementClose(getLoaderCssPath(), 120);
 	}
 
 	private void waitElementClose(String Css, int timeout) {
-		new FluentWait<WebDriver>(getDriver()).withTimeout(100, TimeUnit.SECONDS).pollingEvery(100, TimeUnit.MILLISECONDS)
+		new FluentWait<WebDriver>(getDriver())
+				.withTimeout(100, TimeUnit.SECONDS)
+				.pollingEvery(100, TimeUnit.MILLISECONDS)
 				.ignoring(NoSuchElementException.class)
 				.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(Css)));
 	}
@@ -97,5 +97,13 @@ public abstract class BaseCell {
 
 	public static void setDriver(WebDriver driver) {
 		BaseCell.driver = driver;
+	}
+
+	public String getLoaderCssPath() {
+		return loaderCssPath;
+	}
+
+	public void setLoaderCssPath(String loaderCssPath) {
+		this.loaderCssPath = loaderCssPath;
 	}
 }

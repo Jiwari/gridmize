@@ -43,7 +43,7 @@ public class Grid {
 	public Row getRow(int rowIndex) {
 		rowIndex += rowModifier;
 		TableCellHeader[] header = gridHeader.getEnumConstants();
-		Row row = new Row(rowIndex);
+		Row row = new Row(rowIndex, gridHeader);
 		for (int columnIndex = 1; columnIndex <= header.length; columnIndex++) {
 			row.add(getCellType(header[columnIndex - 1], rowIndex));
 		}
