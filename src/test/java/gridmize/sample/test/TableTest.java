@@ -10,7 +10,7 @@ import gridmize.sample.tables.GuiTestToolsTable;
 public class TableTest {
 
 	public static void main(String[] args) throws InterruptedException {
-		System.setProperty("webdriver.chrome.driver", "C:/Renner.Config/chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:/chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		BaseCell.setDriver(driver);
 		driver.get("https://en.wikipedia.org/wiki/List_of_GUI_testing_tools");		
